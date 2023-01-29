@@ -13,5 +13,6 @@ public class PlayerController : MonoBehaviour
     {
         //TODO add click logic
         Debug.Log("Click!");
+        MapController.Instance.Direction = !MapController.Instance.Direction;
     }
 }
