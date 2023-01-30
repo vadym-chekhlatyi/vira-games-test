@@ -6,11 +6,11 @@ public class MapController : MonoBehaviour
 {
     public static MapController Instance { get; private set; }
 
-    public bool Direction;
+    [SerializeField] private GameObject mapBlockPrefab;
 
-    [SerializeField] private Transform mapTransform;
+    [SerializeField] private int objectsToPool;
 
-    private bool isPaused;
+    private List<GameObject> mapPool = new List<GameObject>();
 
     private void Awake()
     {
@@ -22,27 +22,7 @@ public class MapController : MonoBehaviour
         {
             Instance = this;
         }
-
-        isPaused = false;
     }
 
-    private void FixedUpdate()
-    {
-        if (!isPaused)
-        {
-            MoveMap();
-        }
-    }
 
-    private void MoveMap()
-    {
-        if (Direction)
-        {
-            mapTransform.Translate(new Vector3(Time.deltaTime, 0, 0));
-        }
-        else
-        {
-            mapTransform.Translate(new Vector3(0, 0, -Time.deltaTime));
-        }
-    }
 }
