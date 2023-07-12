@@ -58,8 +58,8 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         GameObject collisionObject = collision.gameObject;
-        {
-        if (collisionObject.GetComponent<MapComponent>() != null && transform.position.y < PLAYER_Y_POSITION)
+
+        if (collisionObject.GetComponent<MapComponent>() != null && transform.position.y < PLAYER_Y_POSITION){
             Debug.Log("Pause");
             IsPaused = true;
         }
