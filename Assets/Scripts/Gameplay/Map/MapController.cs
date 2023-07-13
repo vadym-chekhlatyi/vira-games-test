@@ -6,11 +6,8 @@ public class MapController : MonoBehaviour
 {
     public static MapController Instance { get; private set; }
 
-    [SerializeField] private GameObject mapBlockPrefab;
+    public GameConfig Config;
 
-    [SerializeField] private int objectsToPoolCount;
-
-    [SerializeField] private int maxBlocksFromCenter;
     private int currentBlockPosition;
     private GameObject lastMapBlock;
 
@@ -43,9 +40,9 @@ public class MapController : MonoBehaviour
     private void CreateObjectsToPool()
     {
         mapBlockPool = new List<GameObject>();
-        for (int i = 0; i < objectsToPoolCount; i++)
+        for (int i = 0; i < Config.ObjectsToPoolCount; i++)
         {
-            GameObject mapBlock = Instantiate(mapBlockPrefab, transform);
+            GameObject mapBlock = Instantiate(Config.MapBlockPrefab, transform);
             mapBlock.SetActive(false);
             mapBlockPool.Add(mapBlock);
         }
@@ -53,7 +50,7 @@ public class MapController : MonoBehaviour
 
     public GameObject GetPooledObject() 
     { 
-        for (int i = 0; i < objectsToPoolCount; i++) 
+        for (int i = 0; i < Config.ObjectsToPoolCount; i++) 
         { 
             if (!mapBlockPool[i].activeInHierarchy) 
             { 
@@ -67,11 +64,11 @@ public class MapController : MonoBehaviour
     public void GenerateNewTile(){
         GameObject mapBlock = GetPooledObject();
 
-        if(currentBlockPosition == maxBlocksFromCenter){
+        if(currentBlockPosition == Config.MaxBlocksFromCenter){
             SetBlockPosition(mapBlock, lastMapBlock.transform.localPosition, false);
             currentBlockPosition--;
         }
-        else if(currentBlockPosition == -maxBlocksFromCenter){
+        else if(currentBlockPosition == -Config.MaxBlocksFromCenter){
             SetBlockPosition(mapBlock, lastMapBlock.transform.localPosition, true);
             currentBlockPosition++;
         }
@@ -100,34 +97,9 @@ public class MapController : MonoBehaviour
         currentBlockPosition = 1;
         lastMapBlock.SetActive(true);
 
-        for (int i = 1; i < objectsToPoolCount; i++)
+        for (int i = 1; i < Config.ObjectsToPoolCount; i++)
         {
-            GameObject mapBlock = GetPooledObject();
-
-            if(currentBlockPosition == maxBlocksFromCenter){
-                SetBlockPosition(mapBlock, lastMapBlock.transform.localPosition, false);
-                currentBlockPosition--;
-            }
-            else if(currentBlockPosition == -maxBlocksFromCenter){
-                SetBlockPosition(mapBlock, lastMapBlock.transform.localPosition, true);
-                currentBlockPosition++;
-            }
-            else{
-                if(GetRandomDirection() == 0)
-                {
-                    SetBlockPosition(mapBlock, lastMapBlock.transform.localPosition, true);
-                    currentBlockPosition++;
-                }
-                else
-                {
-                    SetBlockPosition(mapBlock, lastMapBlock.transform.localPosition, false);
-                    currentBlockPosition--;
-                }
-            }
-
-            mapBlock.SetActive(true);
-
-            lastMapBlock = mapBlock;
+            GenerateNewTile();
         }
 
         isGenerated = true;

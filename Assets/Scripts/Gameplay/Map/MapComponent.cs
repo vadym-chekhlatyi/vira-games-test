@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class MapComponent : MonoBehaviour
 {
-    [SerializeField] private float speed = 5;
     private const string PLAYER_TAG = "Player";
 
     private void OnCollisionExit(Collision collision) {
@@ -20,6 +19,7 @@ public class MapComponent : MonoBehaviour
     {
         gameObject.SetActive(false);
 
+//TODO Rework
         if(name == "Start Platform")
             return;
             
@@ -27,8 +27,9 @@ public class MapComponent : MonoBehaviour
     }
 
     private IEnumerator FallDown(){
+        float fallDownSpeed = MapController.Instance.Config.FallDownSpeed;
         while(gameObject.activeInHierarchy){
-            transform.Translate(Vector3.down * speed * Time.deltaTime);
+            transform.Translate(Vector3.down * fallDownSpeed * Time.deltaTime);
             yield return new WaitForEndOfFrame();
         }
     }

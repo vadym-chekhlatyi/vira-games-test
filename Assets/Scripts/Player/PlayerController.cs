@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 
     private const float PLAYER_Y_POSITION = 0.75f;
 
-    public PlayerConfig Config;
+    public GameConfig Config;
 
     private bool Direction;
 
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        float movementSpeed = Config.movementSpeed * Time.deltaTime;
+        float movementSpeed = Config.PlayerMovementSpeed * Time.deltaTime;
         if (Direction)
         {
             transform.Translate(new Vector3(-movementSpeed, 0, 0));

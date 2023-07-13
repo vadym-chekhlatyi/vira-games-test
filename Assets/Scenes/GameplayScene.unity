@@ -231,7 +231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a0744b754e9fd4c9a8acd88f5a34c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
 --- !u!1 &494866302
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,9 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e72713b28ccf42428cf45525620c004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapBlockPrefab: {fileID: 4240094947675156844, guid: 98c1bfa67e4d4b7438638dc5abe7a832, type: 3}
-  objectsToPoolCount: 50
-  maxBlocksFromCenter: 4
+  Config: {fileID: 11400000, guid: d591f5b666c428a478d7c21d8d52650c, type: 2}
 --- !u!1 &529319326
 GameObject:
   m_ObjectHideFlags: 0
