@@ -19,6 +19,10 @@ public class MapComponent : MonoBehaviour
     void OnBecameInvisible()
     {
         gameObject.SetActive(false);
+
+        if(name == "Start Platform")
+            return;
+            
         MapController.Instance.GenerateNewTile();
     }
 
