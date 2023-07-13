@@ -12,6 +12,7 @@ public class MapController : MonoBehaviour
 
     [SerializeField] private int maxBlocksFromCenter;
     private int currentBlockPosition;
+    private GameObject lastMapBlock;
 
     private List<GameObject> mapBlockPool;
     private bool isGenerated;
@@ -64,44 +65,69 @@ public class MapController : MonoBehaviour
     }
 
     public void GenerateNewTile(){
+        GameObject mapBlock = GetPooledObject();
 
+        if(currentBlockPosition == maxBlocksFromCenter){
+            SetBlockPosition(mapBlock, lastMapBlock.transform.localPosition, false);
+            currentBlockPosition--;
+        }
+        else if(currentBlockPosition == -maxBlocksFromCenter){
+            SetBlockPosition(mapBlock, lastMapBlock.transform.localPosition, true);
+            currentBlockPosition++;
+        }
+        else{
+            if(GetRandomDirection() == 0)
+            {
+                SetBlockPosition(mapBlock, lastMapBlock.transform.localPosition, true);
+                currentBlockPosition++;
+            }
+            else
+            {
+                SetBlockPosition(mapBlock, lastMapBlock.transform.localPosition, false);
+                currentBlockPosition--;
+            }
+        }
+
+        mapBlock.SetActive(true);
+
+        lastMapBlock = mapBlock;
     }
 
     private void GenerateMap()
     {
-        GameObject previousMapBlock = GetPooledObject();
-        previousMapBlock.transform.localPosition = mapFirstBlockPosition;
+        lastMapBlock = GetPooledObject(); 
+        lastMapBlock.transform.localPosition = mapFirstBlockPosition;
         currentBlockPosition = 1;
-        previousMapBlock.SetActive(true);
+        lastMapBlock.SetActive(true);
 
         for (int i = 1; i < objectsToPoolCount; i++)
         {
             GameObject mapBlock = GetPooledObject();
 
             if(currentBlockPosition == maxBlocksFromCenter){
-                SetBlockPosition(mapBlock, previousMapBlock.transform.localPosition, false);
+                SetBlockPosition(mapBlock, lastMapBlock.transform.localPosition, false);
                 currentBlockPosition--;
             }
             else if(currentBlockPosition == -maxBlocksFromCenter){
-                SetBlockPosition(mapBlock, previousMapBlock.transform.localPosition, true);
+                SetBlockPosition(mapBlock, lastMapBlock.transform.localPosition, true);
                 currentBlockPosition++;
             }
             else{
                 if(GetRandomDirection() == 0)
                 {
-                    SetBlockPosition(mapBlock, previousMapBlock.transform.localPosition, true);
+                    SetBlockPosition(mapBlock, lastMapBlock.transform.localPosition, true);
                     currentBlockPosition++;
                 }
                 else
                 {
-                    SetBlockPosition(mapBlock, previousMapBlock.transform.localPosition, false);
+                    SetBlockPosition(mapBlock, lastMapBlock.transform.localPosition, false);
                     currentBlockPosition--;
                 }
             }
 
             mapBlock.SetActive(true);
 
-            previousMapBlock = mapBlock;
+            lastMapBlock = mapBlock;
         }
 
         isGenerated = true;
