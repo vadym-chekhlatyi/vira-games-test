@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if (!PlayerController.Instance.IsPaused)
         {
-            float movementSpeed = PlayerController.Instance.Config.movementSpeed / 2.8f * Time.deltaTime;
-            //movementSpeed /= PlayerController.Instance.config.movementSpeed;
-            transform.Translate(new Vector3(0f, movementSpeed, 0f)); 
+            Vector3 ballPosition = PlayerController.Instance.transform.position;
+            Vector3 ballScreenPosition = Camera.main.WorldToScreenPoint(ballPosition);
+            Vector3 centerPoint = new Vector3(Screen.width / 2, Screen.height / 2, ballScreenPosition.z);
+            Vector3 screenOffset = ballScreenPosition - centerPoint;
+            Vector3 worldOffset = Camera.main.ScreenToWorldPoint(screenOffset) - Camera.main.ScreenToWorldPoint(Vector3.zero);
+
+            Vector3 newPosition = new Vector3(transform.position.x, transform.position.y + worldOffset.y, transform.position.z);
+            transform.position = newPosition;
         }
     }
 }
