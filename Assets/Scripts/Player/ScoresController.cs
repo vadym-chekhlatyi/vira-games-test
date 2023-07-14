@@ -14,6 +14,10 @@ public class ScoresController : MonoBehaviour
         set{ 
             scores = value; 
             scoresText.text = value.ToString();
+
+            if(scores % MapController.Instance.Config.ScoresTillColorChange == 0){
+                MapController.Instance.ChangeMapColor();
+            }
         }
     }
 
