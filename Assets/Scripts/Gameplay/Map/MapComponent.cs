@@ -10,6 +10,7 @@ public class MapComponent : MonoBehaviour
     private void OnCollisionExit(Collision collision) {
         if(collision.gameObject.CompareTag(PLAYER_TAG)){
             if(!PlayerController.Instance.IsPaused){
+                ScoresController.Instance.Scores++;
                 StartCoroutine(FallDown());
             }
         }
