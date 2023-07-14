@@ -10,11 +10,17 @@ public class GameConfig : ScriptableObject
     
     [Space]
     [Header("Map")]
-    public float FallDownSpeed;
     public GameObject MapBlockPrefab;
-
+    public GameObject DiamondPrefab;
+    public float FallDownSpeed;
+    public float DiamondSpawnChance = 10f;
     public int ObjectsToPoolCount;
 
     public int MaxBlocksFromCenter;
+    public Material MapBlockMaterial;
+    public int ScoresTillColorChange;
+    public float ColorChangeTime;
+    [ColorUsage(true)]
+    public List<Color> MapColors;
 
 }

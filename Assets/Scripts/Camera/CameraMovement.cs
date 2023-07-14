@@ -6,7 +6,7 @@ public class CameraMovement : MonoBehaviour
 {
     private void LateUpdate()
     {
-        if (!PlayerController.Instance.IsPaused)
+        if (!PlayerController.Instance.IsPaused && GameController.Instance.isGameStarted)
         {
             Vector3 ballPosition = PlayerController.Instance.transform.position;
             Vector3 ballScreenPosition = Camera.main.WorldToScreenPoint(ballPosition);

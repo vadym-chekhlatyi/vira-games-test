@@ -85,6 +85,8 @@ public class MapController : MonoBehaviour
             }
         }
 
+        TryGenerateDiamond(mapBlock);
+
         mapBlock.SetActive(true);
 
         lastMapBlock = mapBlock;
@@ -113,13 +115,25 @@ public class MapController : MonoBehaviour
             mapBlock.transform.localPosition = previousBlockPosition + Vector3.left;
         }
     }
-    
-    private void SetBlockPositionToRight(GameObject mapBlock){
 
+    private void TryGenerateDiamond(GameObject mapBlock){
+        if(Random.Range(0, 100) < Config.DiamondSpawnChance){
+            mapBlock.GetComponent<MapBlock>().Diamond.SetActive(true);
+        }
     }
 
     private int GetRandomDirection()
     {
         return Random.Range(0, 2);
     }
+
+    public void ChangeMapColor(){
+        int randomId = Random.Range(0, Config.MapColors.Count-1);
+        Color newColor = Config.MapColors[randomId];
+        foreach(var mapBlock in mapBlockPool){
+            MapBlock mapBlockComponent = mapBlock.GetComponent<MapBlock>();
+            StartCoroutine(mapBlockComponent.FadeColor(newColor));
+        }
+    }
+
 }

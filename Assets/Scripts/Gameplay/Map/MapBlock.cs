@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapComponent : MonoBehaviour
+public class MapBlock : MonoBehaviour
 {
     private const string PLAYER_TAG = "Player";
+    public GameObject Diamond;
+    [SerializeField] private bool isStartPlatform;
 
     private void OnCollisionExit(Collision collision) {
         if(collision.gameObject.CompareTag(PLAYER_TAG)){
-            if(!PlayerController.Instance.IsPaused){
+            if(!PlayerController.Instance.IsPaused && GameController.Instance.isGameStarted){
                 ScoresController.Instance.Scores++;
                 StartCoroutine(FallDown());
             }
@@ -20,8 +22,7 @@ public class MapComponent : MonoBehaviour
     {
         gameObject.SetActive(false);
 
-//TODO Rework
-        if(name == "Start Platform")
+        if(isStartPlatform)
             return;
             
         MapController.Instance.GenerateNewTile();
@@ -32,6 +33,19 @@ public class MapComponent : MonoBehaviour
         float fallDownSpeed = MapController.Instance.Config.FallDownSpeed;
         while(gameObject.activeInHierarchy){
             transform.Translate(Vector3.down * fallDownSpeed * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public IEnumerator FadeColor(Color endColor){
+        MeshRenderer mesh = GetComponent<MeshRenderer>();
+
+        Color startColor = mesh.material.color;
+        float colorChangeTime = MapController.Instance.Config.ColorChangeTime;
+        Color offset = (endColor - startColor) * Time.deltaTime / colorChangeTime;
+        
+        while(mesh.material.color != endColor){
+            mesh.material.color += offset;
             yield return new WaitForEndOfFrame();
         }
     }

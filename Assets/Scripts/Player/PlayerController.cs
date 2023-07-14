@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -5,8 +6,10 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance { get; private set; }
 
     private const float PLAYER_Y_POSITION = 0.75f;
+    private const string DIAMOND_TAG = "Diamond";
 
     public GameConfig Config;
+    private PlayerStats stats;
 
     private bool Direction;
 
@@ -26,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        stats = GetComponent<PlayerStats>();
+        stats.LoadStats();
         InputHandler.Instance.SignalOnClick = OnClick;
     }
 
@@ -36,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!IsPaused)
+        if (!IsPaused && GameController.Instance.isGameStarted)
         {
             MovePlayer();
         }
@@ -59,9 +64,23 @@ public class PlayerController : MonoBehaviour
     {
         GameObject collisionObject = collision.gameObject;
 
-        if (collisionObject.GetComponent<MapComponent>() != null && transform.position.y < PLAYER_Y_POSITION){
-            Debug.Log("Pause");
+        if (collisionObject.GetComponent<MapBlock>() != null && transform.position.y < PLAYER_Y_POSITION){
             IsPaused = true;
+            PopUpManager.OpenPopup(PopUpManager.Popups.GameOverPopup);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision) {
+        GameObject collisionObject = collision.gameObject;
+
+        if(collisionObject.CompareTag(DIAMOND_TAG)){
+            PickDiamond(collisionObject);
+        }
+    }
+
+    private void PickDiamond(GameObject diamond)
+    {
+        stats.Crystals++;
+        diamond.SetActive(false);
     }
 }
