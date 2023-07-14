@@ -28,6 +28,7 @@ public class MapComponent : MonoBehaviour
     }
 
     private IEnumerator FallDown(){
+        yield return new WaitForSeconds(1f);
         float fallDownSpeed = MapController.Instance.Config.FallDownSpeed;
         while(gameObject.activeInHierarchy){
             transform.Translate(Vector3.down * fallDownSpeed * Time.deltaTime);
