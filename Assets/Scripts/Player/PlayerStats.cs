@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    public float GamesPlayed = 0;
-    public float Crystals = 0;
+    private const string CRYSTALS_KEY = "Crystals";
+    private const string GAMES_PLAYED = "GamesPlayed";
+    private const string HIGHEST_SCORE = "HighestScore";
+    public int GamesPlayed = 0;
+    public int Crystals = 0;
+    public int HighestScore = 0;
 
     public void LoadStats(){
-        //TODO Remove magic numbers
-        if(PlayerPrefs.GetInt("GamesPlayed") > 0){
-            GamesPlayed = PlayerPrefs.GetInt("GamesPlayed");
-            Crystals = PlayerPrefs.GetInt("Crystals");
+        if(PlayerPrefs.GetInt(GAMES_PLAYED, 0) > 0){
+            GamesPlayed = PlayerPrefs.GetInt(GAMES_PLAYED);
+            Crystals = PlayerPrefs.GetInt(CRYSTALS_KEY);
+            HighestScore = PlayerPrefs.GetInt(HIGHEST_SCORE);
         }
     }
 }
