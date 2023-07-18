@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnClick()
     {
+        SoundManager.Instance.PlaySound(SoundManager.AudioClips.Click);
         Direction = !Direction;
     }
 
