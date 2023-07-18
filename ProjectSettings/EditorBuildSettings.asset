@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Popups/StorePopup.unity
     guid: a02f868738b99a349bdf25b956379843
   - enabled: 1
-    path: Assets/Scenes/Popups/GameOver.unity
+    path: Assets/Scenes/Popups/GameOverPopup.unity
     guid: 0bde413129405ef4fb51701bb8dd6572
   m_configObjects: {}
