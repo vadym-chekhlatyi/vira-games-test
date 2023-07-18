@@ -6,7 +6,7 @@ using UnityEngine;
 public class MapBlock : MonoBehaviour
 {
     private const string PLAYER_TAG = "Player";
-    public GameObject Diamond;
+    public GameObject Crystal;
     [SerializeField] private bool isStartPlatform;
 
     private void OnCollisionExit(Collision collision) {

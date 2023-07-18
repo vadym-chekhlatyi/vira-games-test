@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 896859085428989393}
   - component: {fileID: 1328332885586058941}
   m_Layer: 0
-  m_Name: Diamond
-  m_TagString: Diamond
+  m_Name: Crystal
+  m_TagString: Crystal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

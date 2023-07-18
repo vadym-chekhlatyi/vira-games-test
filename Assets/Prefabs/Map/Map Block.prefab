@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f94f460060e64c4a935d7b768452bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Diamond: {fileID: 725583212839073083}
+  Crystal: {fileID: 725583212839073083}
 --- !u!33 &658946125402659867
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -119,7 +119,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 93843615351256412, guid: 2d96634ba44f65946b2a7a1778378517, type: 3}
       propertyPath: m_Name
-      value: Diamond
+      value: Crystal
       objectReference: {fileID: 0}
     - target: {fileID: 93843615351256412, guid: 2d96634ba44f65946b2a7a1778378517, type: 3}
       propertyPath: m_IsActive

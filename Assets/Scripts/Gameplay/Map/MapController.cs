@@ -85,7 +85,7 @@ public class MapController : MonoBehaviour
             }
         }
 
-        TryGenerateDiamond(mapBlock);
+        TryGenerateCrystal(mapBlock);
 
         mapBlock.SetActive(true);
 
@@ -116,9 +116,9 @@ public class MapController : MonoBehaviour
         }
     }
 
-    private void TryGenerateDiamond(GameObject mapBlock){
-        if(Random.Range(0, 100) < Config.DiamondSpawnChance){
-            mapBlock.GetComponent<MapBlock>().Diamond.SetActive(true);
+    private void TryGenerateCrystal(GameObject mapBlock){
+        if(Random.Range(0, 100) < Config.CrystalSpawnChance){
+            mapBlock.GetComponent<MapBlock>().Crystal.SetActive(true);
         }
     }
 

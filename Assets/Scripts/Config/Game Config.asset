@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerMovementSpeed: 3
   MapBlockPrefab: {fileID: 4240094947675156844, guid: 98c1bfa67e4d4b7438638dc5abe7a832, type: 3}
-  DiamondPrefab: {fileID: 93843615351256412, guid: 2d96634ba44f65946b2a7a1778378517, type: 3}
+  CrystalPrefab: {fileID: 93843615351256412, guid: 2d96634ba44f65946b2a7a1778378517, type: 3}
   FallDownSpeed: 5
-  DiamondSpawnChance: 10
+  CrystalSpawnChance: 10
   ObjectsToPoolCount: 50
   MaxBlocksFromCenter: 4
   MapBlockMaterial: {fileID: 2100000, guid: d6171b2b6e102794bbc081ace9af72dc, type: 2}

@@ -23,4 +23,8 @@ public static class PopUpManager
     public static void OpenPopup(Popups popup){
         SceneManager.LoadScene(PopUpNames[popup], LoadSceneMode.Additive);
     }
+    
+    public static void ClosePopup(Popups popup){
+        SceneManager.UnloadSceneAsync(PopUpNames[popup]);
+    }
 }

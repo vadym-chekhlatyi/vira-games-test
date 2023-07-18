@@ -14,10 +14,11 @@ public class GameController : MonoBehaviour
     private void Start() {
         Instance = this;
         playerController = FindObjectOfType<PlayerController>();
+        playerController.Init();
         
         PopUpManager.Init();
 
-        MainMenu main = mainMenuUI.GetComponent<MainMenu>();
+        MainMenuPopup main = mainMenuUI.GetComponent<MainMenuPopup>();
         main.Init(playerController.Stats);
     }
 

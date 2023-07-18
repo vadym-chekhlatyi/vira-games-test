@@ -11,9 +11,9 @@ public class GameConfig : ScriptableObject
     [Space]
     [Header("Map")]
     public GameObject MapBlockPrefab;
-    public GameObject DiamondPrefab;
+    public GameObject CrystalPrefab;
     public float FallDownSpeed;
-    public float DiamondSpawnChance = 10f;
+    public float CrystalSpawnChance = 10f;
     public int ObjectsToPoolCount;
 
     public int MaxBlocksFromCenter;

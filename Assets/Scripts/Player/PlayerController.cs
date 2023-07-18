@@ -6,14 +6,13 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance { get; private set; }
 
     private const float PLAYER_Y_POSITION = 0.75f;
-    private const string DIAMOND_TAG = "Diamond";
+    private const string Crystal_TAG = "Crystal";
 
     public GameConfig Config;
-    public PlayerStats Stats;
+    [HideInInspector] public PlayerStats Stats;
+    [HideInInspector] public bool IsPaused;
 
     private bool Direction;
-
-    [HideInInspector] public bool IsPaused;
 
     private void Awake()
     {
@@ -27,7 +26,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Start()
+    public void Init()
     {
         Stats = new PlayerStats();
         Stats.Init();
@@ -78,14 +77,15 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision) {
         GameObject collisionObject = collision.gameObject;
 
-        if(collisionObject.CompareTag(DIAMOND_TAG)){
-            PickDiamond(collisionObject);
+        if(collisionObject.CompareTag(Crystal_TAG)){
+            PickCrystal(collisionObject);
         }
     }
 
-    private void PickDiamond(GameObject diamond)
+    private void PickCrystal(GameObject Crystal)
     {
         Stats.Crystals++;
-        diamond.SetActive(false);
+        SoundManager.Instance.PlaySound(SoundManager.AudioClips.CrystalPickUp);
+        Crystal.SetActive(false);
     }
 }

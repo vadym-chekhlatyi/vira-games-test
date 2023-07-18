@@ -5,11 +5,24 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance;
-    public List<AudioClip> AudioClipsList;
+    public List<AudioSource> AudioClipsList;
     private AudioSource audioSource;
+    private bool isMuted;
+    public bool IsMuted{
+        get{
+            return isMuted;
+        } 
+        set{
+            isMuted = value;
+            foreach(var audioSource in AudioClipsList){
+                audioSource.mute = isMuted;
+            }
+        }
+    }
 
     public enum AudioClips{
-        Click
+        Click,
+        CrystalPickUp,
     }
 
     public void Start(){
@@ -18,10 +31,6 @@ public class SoundManager : MonoBehaviour
     }
 
     public void PlaySound(AudioClips index){
-        if(audioSource.isPlaying){
-            audioSource.Stop();
-        }
-        audioSource.clip = AudioClipsList[(int)index];
-        audioSource.Play();
+        AudioClipsList[(int)index].Play();
     }
 }
