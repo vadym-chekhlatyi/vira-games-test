@@ -7,9 +7,9 @@ public class ScoresController : MonoBehaviour
 {
     public static ScoresController Instance;
     [SerializeField] private TextMeshProUGUI scoresText;
-    private float scores = 0;
+    private int scores = 0;
 
-    public float Scores {
+    public int Scores {
         get{ return scores; }
         set{ 
             scores = value; 

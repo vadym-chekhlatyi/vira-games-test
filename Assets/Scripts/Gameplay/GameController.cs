@@ -6,18 +6,25 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public static GameController Instance;
-    public bool isGameStarted = false;
+    [SerializeField] private GameObject ingameUI;
+    [SerializeField] private GameObject mainMenuUI;
+    [HideInInspector] public bool isGameStarted = false;
+    private PlayerController playerController;
+
     private void Start() {
         Instance = this;
+        playerController = FindObjectOfType<PlayerController>();
+        
         PopUpManager.Init();
-        StartGameplay();
+
+        MainMenu main = mainMenuUI.GetComponent<MainMenu>();
+        main.Init(playerController.Stats);
     }
 
-    private void StartGameplay(){
-        string mainMenuPopUpName = PopUpManager.PopUpNames[PopUpManager.Popups.MainMenuPopup];
-        if(SceneManager.GetSceneByName(mainMenuPopUpName).isLoaded){
-            SceneManager.UnloadSceneAsync(mainMenuPopUpName);
-        }
+    public void StartGameplay(){
+        mainMenuUI.SetActive(false);
+        ingameUI.SetActive(true);
         isGameStarted = true;
+        playerController.Stats.GamesPlayed++;
     }
 }

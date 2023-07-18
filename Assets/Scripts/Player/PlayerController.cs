@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private const string DIAMOND_TAG = "Diamond";
 
     public GameConfig Config;
-    private PlayerStats stats;
+    public PlayerStats Stats;
 
     private bool Direction;
 
@@ -29,8 +29,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        stats = GetComponent<PlayerStats>();
-        stats.LoadStats();
+        Stats = new PlayerStats();
+        Stats.Init();
         InputHandler.Instance.SignalOnClick = OnClick;
     }
 
@@ -66,6 +66,10 @@ public class PlayerController : MonoBehaviour
 
         if (collisionObject.GetComponent<MapBlock>() != null && transform.position.y < PLAYER_Y_POSITION){
             IsPaused = true;
+            int score = ScoresController.Instance.Scores;
+            if(score > Stats.HighestScore){
+                Stats.HighestScore = score;
+            }
             PopUpManager.OpenPopup(PopUpManager.Popups.GameOverPopup);
         }
     }
@@ -80,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
     private void PickDiamond(GameObject diamond)
     {
-        stats.Crystals++;
+        Stats.Crystals++;
         diamond.SetActive(false);
     }
 }

@@ -20,7 +20,7 @@ MonoBehaviour:
   ObjectsToPoolCount: 50
   MaxBlocksFromCenter: 4
   MapBlockMaterial: {fileID: 2100000, guid: d6171b2b6e102794bbc081ace9af72dc, type: 2}
-  ScoresTillColorChange: 10
+  ScoresTillColorChange: 50
   ColorChangeTime: 3
   MapColors:
   - {r: 0, g: 0.48235294, b: 1, a: 1}
